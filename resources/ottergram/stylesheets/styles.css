@@ -1,0 +1,158 @@
+/* Fonts for the project*/
+
+@font-face {
+  font-family: 'lakeshore';
+  src: url('fonts/LAKESHOR-webfont.eot');
+  src: url('fonts/LAKESHOR-webfont.eot?#iefix') format('embedded-opentype'), url(fonts/LAKESHOR-webfont.woff) format('woff'), url('fonts/LAKESHOR-webfont.ttf') format('truetype'), url('fonts/LAKESHOR-webfont.svg#lakeshore') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'airstreamregular';
+  src: url('fonts/Airstream-webfont.eot');
+  src: url('fonts/Airstream-webfont.eot?#iefix') format('embedded-opentype'), url(fonts/Airstream-webfont.woff) format('woff'), url('fonts/Airstream-webfont.ttf') format('truetype'), url('fonts/Airstream-webfont.svg#airstream') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*Element Selector Styles*/
+
+html, body {
+/* by setting height: 100% for <html> & <body> will allow the content to fill the browser or device window */
+  height: 100%;
+}
+
+body {
+/* display: flex; makes <body> into a Flex Container */
+  display: flex;
+  flex-direction: column;
+
+  font-size: 10px;
+  background: rgb(56, 29, 69);
+}
+
+a {
+  /*style decoration / underline removed*/
+  text-decoration: none;
+}
+/*Class Selector Styles*/
+
+.main-header {
+  flex: 0 1 auto; /* reads as I don't want to grow any larger; I will shrink as needed; Please calculate my size for me */
+}
+
+/* Styles the h1 ottergram in header*/
+.logo-text {
+  background: white;
+
+  text-align: center;
+  text-transform: uppercase;
+  font-family: lakeshore;
+  font-size: 37px;
+}
+
+.main-content {
+  flex: 1 1 auto; /* reads as I would like to grow as much as possible; I will shrink as needed; please calculate my size for me */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Removed this declaration when adding the flexbox to .thumbnail-list. Was creating no Margin space for the first list image since it did not have a sibling
+
+/* .thumbnail-item + .thumbnail-item adds a margin to all thumbnail-item's that have a sibling */
+/* Since the first .thumnail-item IS NOT A SIBLING there is no margin added; this is good bc the heading already has a margin
+.thumbnail-item + .thumbnail-item {
+  margin-top: 10px;
+}
+
+*/
+
+.thumbnail-item {
+  display: inline-block;
+  /* width: 120px;  replacing width declartion with a min-width & max-wdith declarations to accomodate display:flex; change in .thumbnail-list */
+  min-width: 120px;
+  max-width: 120px;
+  border: 1px solid rgb(100%, 100%, 100%);
+  border: 1px solid rgba(100%, 100%, 100%, 0.8);
+}
+
+.thumbnail-list {
+  flex: 0 1 auto; /* reads as I don't want to grow any larger; I will shrink as needed; Please calculate my size for me */
+  order: 2; /* order is a Flexbox property that can be used to change the Source Order of elements; thumbnail-list is now below display-image-container; it now appears 2nd */
+  display: flex; /* makes .thumbnail-list into a Flexbox */
+  justify-content: space-between;
+  list-style: none;
+  /*Turning padding: 0; Stops the user agent style that indents images*/
+  padding: 0;
+
+/* white-space: nowrap; prevents .thumbnail-item elements from wrapping */
+  white-space: nowrap;
+/* overflow-x: auto; tells Chrome or any browser to add a scroll bar along the horizontal space aka x-axis */
+  overflow-x: auto;
+}
+
+.thumbnail-image {
+  display: block;
+  width: 100%;
+}
+
+.thumbnail-title {
+  /*The following effects the .thumbnail-title element's 'box'*/
+  display: block;
+  margin: 0;
+  padding: 4px 10px;
+  /*The following effects the background & txt color of .thumbnail-title*/
+  background: rgb(159, 114, 180)/*rgb(96, 125, 139)*/;
+  color: white /*rgb(202, 238, 255)*/;
+
+  font-size: 18px;
+}
+
+.detail-image-container {
+  flex: 1 1 auto; /*reads as I would like to grow as much as possible; I will shrink as needed; please calculate my size for me*/
+  display: flex; /* makes .detail-image-container into a Flexbox */
+  justify-content: center; /* draws the flex items in the center of the main axis, horizontally in this case -- the default */
+  align-items: center; /* draws flex items in the center of the corss axis (vertically) */
+}
+
+.detail-image-frame {
+  position: relative; /* You will use this as the containing element for .detail-image-title to reference while it uses position:absolute to float the title in the left corner */
+  text-align: center; /* this will center the content without using a Flexbox; however this only workd horizontally */
+}
+
+.detail-image {
+  width: 90%;
+}
+
+.detail-image-title {
+  position: absolute;
+  bottom: -16px;
+  left: 4px;
+
+  font-family: airstreamregular;
+  color: white;
+  text-shadow: rgba(0, 0, 0, 0.9) 1px 2px 9px; /* color, offset value pair (1px right 2px below), shadow blur radius */
+  font-size: 40px;
+}
+
+
+/* MEDIA QUERIES */
+
+@media all and (min-width: 768px) {
+  .main-content {
+    flex-direction: row; /*let's the thumbnails sit next to each other instead of scrolling at the 768px viewport size*/
+    overflow: hidden; /*  */
+  }
+  .thumbnail-list {
+    flex-direction: column;
+    order:0;
+    margin-left: 20px;
+  }
+  .thumbnail-item {
+    max-width: 260px;
+  }
+  .thumbnail-item + thumbnail-item {
+    margin-top: 20px;
+  }
+}
